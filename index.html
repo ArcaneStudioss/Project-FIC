@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Projeto de Feira de Ciências — Energia Solar: Comparação entre Protótipos Sustentáveis e Sistemas Reais e sua Viabilidade Residencial." />
+  <title>Energia Solar — FIC</title>
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-brand">☀ FIC <em>| Colégio Adventista de Osório</em></a>
+
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#metodologia">Metodologia</a></li>
+      <li><a href="#comparacao">Comparação</a></li>
+      <li><a href="#viabilidade">Viabilidade</a></li>
+      <li><a href="#calculadora">Calculadora</a></li>
+      <li><a href="#resultados">Resultados</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Menu mobile -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Menu mobile">
+  <a href="#sobre">Sobre o Projeto</a>
+  <a href="#metodologia">Metodologia</a>
+  <a href="#comparacao">Protótipo vs Sistema Real</a>
+  <a href="#viabilidade">Viabilidade Residencial</a>
+  <a href="#calculadora">Calculadora Solar</a>
+  <a href="#resultados">Resultados e Conclusão</a>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+
+  <div class="hero-grid container">
+    <!-- Texto -->
+    <div class="hero-text fade-in">
+      <div class="hero-badge">
+        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a1 1 0 011 1v2a1 1 0 01-2 0V3a1 1 0 011-1zm0 15a1 1 0 011 1v2a1 1 0 01-2 0v-2a1 1 0 011-1zm9-7a1 1 0 010 2h-2a1 1 0 010-2h2zM5 12a1 1 0 010 2H3a1 1 0 010-2h2zm12.66-6.07a1 1 0 010 1.41l-1.42 1.42a1 1 0 01-1.41-1.41l1.41-1.42a1 1 0 011.42 0zM7.76 16.24a1 1 0 010 1.41l-1.41 1.42a1 1 0 01-1.42-1.42l1.42-1.41a1 1 0 011.41 0zm9.9 1.42a1 1 0 01-1.42 1.41l-1.41-1.41a1 1 0 011.41-1.42l1.42 1.42zM7.76 7.76a1 1 0 01-1.41 1.41L4.93 7.76a1 1 0 011.41-1.41l1.42 1.41zM12 7a5 5 0 110 10A5 5 0 0112 7z"/></svg>
+        FIC 2026
+      </div>
+
+      <h1>Energia Solar:<br /><span>Do Protótipo à</span><br />Realidade</h1>
+      <p class="hero-subtitle">Comparação entre Protótipos Sustentáveis e Sistemas Reais</p>
+      <p class="hero-desc">
+        Este projeto investiga a diferença de desempenho entre painéis solares
+        construídos em escala reduzida e sistemas fotovoltaicos residenciais reais,
+        avaliando a viabilidade econômica e ambiental da energia solar para uso doméstico.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#sobre" class="btn-primary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          Explorar o Projeto
+        </a>
+        <a href="#calculadora" class="btn-outline">
+          Calculadora Solar
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num" data-count="90" data-suffix="%">0%</span>
+          <span class="hero-stat-label">Redução na conta</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" data-count="25" data-suffix=" anos">0</span>
+          <span class="hero-stat-label">Vida útil dos painéis</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" data-count="4.5" data-suffix=" anos" data-float="true">0</span>
+          <span class="hero-stat-label">Retorno do investimento</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráfico visual -->
+    <div class="hero-visual fade-in fade-in-delay-2">
+      <div class="sun-graphic">
+        <div class="sun-orbit"><div class="orbit-dot"></div></div>
+        <div class="sun-rays">
+          <svg viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.25" stroke="#F5C400" stroke-width="1.5">
+              <line x1="140" y1="10" x2="140" y2="45"/>
+              <line x1="140" y1="235" x2="140" y2="270"/>
+              <line x1="10" y1="140" x2="45" y2="140"/>
+              <line x1="235" y1="140" x2="270" y2="140"/>
+              <line x1="37" y1="37" x2="61" y2="61"/>
+              <line x1="219" y1="219" x2="243" y2="243"/>
+              <line x1="243" y1="37" x2="219" y2="61"/>
+              <line x1="61" y1="219" x2="37" y2="243"/>
+            </g>
+          </svg>
+        </div>
+        <div class="sun-core">
+          <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="26" cy="26" r="14" fill="#0B1D3A" opacity="0.15"/>
+            <path d="M26 14v3M26 35v3M14 26h3M35 26h3M18.1 18.1l2.1 2.1M31.8 31.8l2.1 2.1M33.9 18.1l-2.1 2.1M20.2 31.8l-2.1 2.1" stroke="#0B1D3A" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="26" cy="26" r="7" fill="#0B1D3A" opacity="0.12"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SOBRE O PROJETO
+═══════════════════════════════════════════ -->
+<section id="sobre">
+  <div class="container">
+    <div class="section-header text-center fade-in">
+      <span class="section-tag">Sobre o Projeto</span>
+      <h2>O que investigamos?</h2>
+      <div class="divider center"></div>
+      <p style="max-width:600px; margin:0 auto;">
+        <!-- EDITE AQUI: Descrição geral do projeto -->
+        Nosso projeto busca entender como a energia solar fotovoltaica funciona na prática,
+        comparando um protótipo construído em laboratório com um sistema real instalado em uma
+        residência, e avaliando se essa tecnologia é acessível para famílias brasileiras.
+      </p>
+    </div>
+
+    <div class="sobre-grid">
+      <div class="text-block fade-in">
+        <!-- EDITE AQUI: Texto de introdução / contexto -->
+        <span class="section-tag">Contexto</span>
+        <h3>Por que estudar energia solar?</h3>
+        <div class="divider"></div>
+        <p>
+          A energia solar é uma das fontes de energia renovável com maior crescimento no Brasil
+          e no mundo. Com a crise climática e o aumento das tarifas de energia elétrica,
+          compreender o potencial fotovoltaico se torna essencial para o futuro sustentável.
+        </p>
+        <p>
+          O Brasil possui uma das maiores incidências solares do mundo, com média de
+          <strong>4,5 a 6 horas de sol pleno por dia</strong>, tornando o país ideal para
+          o aproveitamento dessa fonte limpa e renovável.
+        </p>
+        <p>
+          <!-- Adicione mais texto de contexto aqui -->
+          Apesar do potencial enorme, muitas famílias ainda têm dúvidas sobre a viabilidade
+          econômica da instalação. Este projeto tenta responder essas perguntas com dados reais
+          e experimentos práticos.
+        </p>
+      </div>
+
+      <div class="fade-in fade-in-delay-2">
+        <div class="info-card">
+          <div class="info-card-header">
+            <div class="info-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <h4>Hipótese</h4>
+          </div>
+          <!-- EDITE AQUI: Hipótese do projeto -->
+          <p style="font-size:0.92rem; color:var(--text-soft);">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis repudiandae doloremque voluptatem ratione quibusdam obcaecati, similique nihil possimus fugit non tempore repellendus aliquid beatae inventore soluta ducimus dolorem. Sed, rerum.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-header">
+            <div class="info-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h4>Objetivo Geral</h4>
+          </div>
+          <!-- EDITE AQUI: Objetivo geral -->
+          <p style="font-size:0.92rem; color:var(--text-soft);">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellendus blanditiis, praesentium quisquam quidem necessitatibus tenetur id temporibus delectus eaque consequuntur, animi, vero accusamus sapiente asperiores cupiditate distinctio enim reprehenderit.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-header">
+            <div class="info-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <h4>Período de Pesquisa</h4>
+          </div>
+          <!-- EDITE AQUI: Período e escola -->
+          <p style="font-size:0.92rem; color:var(--text-soft);">
+            Pesquisa realizada ao longo de <strong>9 meses</strong>, com coleta de dados
+            semanais, análise comparativa e revisão bibliográfica. Desenvolvido pelos alunos
+            do <strong>3º Ano B do Ensino Médio</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     METODOLOGIA (ACCORDION)
+═══════════════════════════════════════════ -->
+<section id="metodologia">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-tag">Como fizemos</span>
+      <h2>Metodologia</h2>
+      <div class="divider"></div>
+      <p>
+        <!-- EDITE AQUI: Introdução da metodologia -->
+        A pesquisa foi dividida em etapas sequenciais, combinando revisão teórica,
+        construção do protótipo, coleta de dados em campo e análise estatística comparativa.
+      </p>
+    </div>
+
+    <div class="accordion fade-in">
+
+      <!-- Etapa 1 -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="accordion-title">
+            <div class="acc-num">1</div>
+            Revisão Bibliográfica
+          </div>
+          <svg class="accordion-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <!-- EDITE AQUI: Texto da etapa 1 -->
+            <p>
+              Realizamos 
+            </p>
+            <p>
+              taltal
+            </p>
+            <!-- Adicione mais texto aqui se necessário -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Etapa 2 -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="accordion-title">
+            <div class="acc-num">2</div>
+            Construção do Protótipo
+          </div>
+          <svg class="accordion-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <!-- EDITE AQUI: Texto da etapa 2 -->
+            <p>
+              Construímos um painel fotovoltaico em escala reduzida utilizando ..., conectadas em série e em paralelo para diferentes
+              configurações de voltagem e corrente. O protótipo possui potência nominal de aproximadamente xW.
+            </p>
+            <p>
+              Materiais utilizados: ...
+            </p>
+            <!-- Adicione especificações técnicas, fotos ou descrições aqui -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Etapa 3 -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="accordion-title">
+            <div class="acc-num">3</div>
+            Coleta de Dados
+          </div>
+          <svg class="accordion-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <!-- EDITE AQUI: Texto da etapa 3 -->
+            <p>
+              Durante x semanas, realizamos medições diárias de tensão (V), corrente (A) e
+              potência gerada (W) pelo protótipo em diferentes condições: manhã, tarde e entardecer,
+              em dias ensolarados, parcialmente nublados e nublados.
+            </p>
+            <p>
+              Paralelamente, coletamos dados de geração de um sistema fotovoltaico residencial
+              de x kWp instalado em uma residência parceira, utilizando um inversor com
+              monitoramento online que registra os dados a cada 5 minutos.
+            </p>
+            <p>
+              Registramos também os dados de irradiação solar da estação meteorológica local
+              e a temperatura dos painéis para correlação com a eficiência.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Etapa 4 -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="accordion-title">
+            <div class="acc-num">4</div>
+            Análise e Comparação
+          </div>
+          <svg class="accordion-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <!-- EDITE AQUI: Texto da etapa 4 -->
+            <p>
+              Os dados coletados foram tabulados em planilhas e submetidos à análise estatística
+              descritiva. Calculamos a eficiência real de cada sistema (η = P_gerada / P_incidente × 100%)
+              e comparamos as curvas de geração ao longo dos dias e semanas.
+            </p>
+            <p>
+              Também realizamos a análise de viabilidade econômica, projetando o retorno financeiro
+              do sistema real para diferentes perfis de consumo residencial, utilizando a tarifa
+              média de energia da região Sul do Brasil.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Etapa 5 -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="accordion-title">
+            <div class="acc-num">5</div>
+            Estudo de Viabilidade Econômica
+          </div>
+          <svg class="accordion-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <!-- EDITE AQUI: Texto da etapa 5 -->
+            <p>
+              Calculamos o custo de instalação de sistemas fotovoltaicos de diferentes potências
+              (1,5 kWp, 3,3 kWp e 6 kWp) e projetamos o tempo de retorno do investimento (payback)
+              considerando financiamento bancário, inflação energética histórica de x% ao ano
+              e vida útil dos painéis de 25 anos.
+            </p>
+            <p>
+              Consultamos orçamentos reais com instaladores certificados e comparamos com
+              programas de incentivo do governo como o microcrédito verde e financiamentos
+              da CAIXA e BNDES para sistemas de energia renovável.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /accordion -->
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     COMPARAÇÃO PROTÓTIPO × SISTEMA REAL
+═══════════════════════════════════════════ -->
+<section id="comparacao" class="compare-section">
+  <div class="container">
+    <div class="section-header text-center fade-in">
+      <span class="section-tag light">Análise Central</span>
+      <h2 class="text-white">Protótipo <span class="text-yellow">×</span> Sistema Real</h2>
+      <div class="divider center"></div>
+      <p>
+        <!-- EDITE AQUI: Introdução da comparação -->
+        Comparamos os dois sistemas em cinco dimensões: eficiência energética, custo,
+        facilidade de implementação, escalabilidade e impacto ambiental.
+      </p>
+    </div>
+
+    <div class="compare-grid fade-in">
+
+      <!-- Coluna Protótipo -->
+      <div class="compare-col">
+        <span class="compare-label proto">Protótipo Artesanal</span>
+        <h3>Sistema em Escala Reduzida</h3>
+        <!-- EDITE AQUI: Descrição do protótipo -->
+        <p style="font-size:0.9rem; color:rgba(255,255,255,0.6);">
+          Painel construído manualmente com x,
+          potência de ~xW, ideal para demonstração e experimentos educacionais.
+        </p>
+        <ul class="compare-list">
+          <li>Potência nominal: x Watts</li>
+          <li>Eficiência medida: x – x%</li>
+          <li>Custo de construção: R$ x,00</li>
+          <li>Vida útil estimada: x – x anos</li>
+          <li>Área dos painéis: x m²</li>
+          <li>Aplicação: carga de bateria / LEDs</li>
+          <li>Instalação: simples, sem certificação</li>
+          <!-- Adicione mais itens aqui -->
+        </ul>
+      </div>
+
+      <!-- VS -->
+      <div class="compare-vs">
+        <div class="vs-line"></div>
+        <div class="vs-circle">VS</div>
+        <div class="vs-line"></div>
+      </div>
+
+      <!-- Coluna Sistema Real -->
+      <div class="compare-col highlight">
+        <span class="compare-label real">Sistema Residencial Real</span>
+        <h3>Instalação Fotovoltaica Comercial</h3>
+        <!-- EDITE AQUI: Descrição do sistema real -->
+        <p style="font-size:0.9rem; color:rgba(255,255,255,0.6);">
+          Sistema de 3,3 kWp com 8 painéis de 415W, inversor string e conexão
+          à rede elétrica (net metering), instalado em residência parceira.
+        </p>
+        <ul class="compare-list">
+          <li>Potência nominal: x (3,3 kWp)</li>
+          <li>Eficiência média: x – x%</li>
+          <li>Custo de instalação: R$ x,00</li>
+          <li>Vida útil garantida: 25 anos</li>
+          <li>Área dos painéis: x m²</li>
+          <li>Aplicação: toda a residência (até 400 kWh/mês)</li>
+          <li>Instalação: empresa certificada + aprovação ANEEL</li>
+          <!-- Adicione mais itens aqui -->
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Texto adicional de análise -->
+    <div class="fade-in" style="margin-top:36px; max-width:700px; margin-left:auto; margin-right:auto; text-align:center;">
+      <!-- EDITE AQUI: Texto de análise comparativa -->
+      <p>
+        Apesar da grande diferença de escala, o protótipo demonstrou os mesmos
+        princípios físicos do sistema real, com eficiência relativa dentro da
+        margem esperada para células de menor qualidade construtiva.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     GRÁFICO COMPARATIVO
+═══════════════════════════════════════════ -->
+<section id="grafico" class="chart-section">
+  <div class="container">
+    <div class="section-header text-center fade-in">
+      <span class="section-tag">Dados Comparativos</span>
+      <h2>Desempenho em Números</h2>
+      <div class="divider center"></div>
+      <!-- EDITE AQUI: Explicação do gráfico -->
+      <p style="max-width:540px; margin:0 auto;">
+        Comparativo dos principais indicadores de desempenho entre o protótipo
+        artesanal e o sistema fotovoltaico residencial real.
+      </p>
+    </div>
+
+    <div class="chart-container fade-in">
+      <div class="chart-bars">
+
+        <!-- Barra 1 -->
+        <div style="margin-bottom:8px; font-size:13px; font-weight:600; color:var(--text-soft);">Eficiência Energética (%)</div>
+        <div class="bar-row">
+          <span class="bar-label">Protótipo</span>
+          <div class="bar-track">
+            <div class="bar-fill navy" data-width="45%" style="min-width:60px;">9,5%</div>
+          </div>
+        </div>
+        <div class="bar-row" style="margin-bottom:20px;">
+          <span class="bar-label">Sistema Real</span>
+          <div class="bar-track">
+            <div class="bar-fill yellow" data-width="90%">18,5%</div>
+          </div>
+        </div>
+
+        <!-- Barra 2 -->
+        <div style="margin-bottom:8px; font-size:13px; font-weight:600; color:var(--text-soft);">Geração em dia ensolarado (relativo à potência nominal)</div>
+        <div class="bar-row">
+          <span class="bar-label">Protótipo</span>
+          <div class="bar-track">
+            <div class="bar-fill navy" data-width="72%">72%</div>
+          </div>
+        </div>
+        <div class="bar-row" style="margin-bottom:20px;">
+          <span class="bar-label">Sistema Real</span>
+          <div class="bar-track">
+            <div class="bar-fill yellow" data-width="87%">87%</div>
+          </div>
+        </div>
+
+        <!-- Barra 3 -->
+        <div style="margin-bottom:8px; font-size:13px; font-weight:600; color:var(--text-soft);">Geração em dia nublado (% do dia ensolarado)</div>
+        <div class="bar-row">
+          <span class="bar-label">Protótipo</span>
+          <div class="bar-track">
+            <div class="bar-fill navy" data-width="28%">28%</div>
+          </div>
+        </div>
+        <div class="bar-row" style="margin-bottom:20px;">
+          <span class="bar-label">Sistema Real</span>
+          <div class="bar-track">
+            <div class="bar-fill yellow" data-width="35%">35%</div>
+          </div>
+        </div>
+
+        <!-- Barra 4 -->
+        <div style="margin-bottom:8px; font-size:13px; font-weight:600; color:var(--text-soft);">Retorno do investimento (quanto menor, melhor)</div>
+        <div class="bar-row">
+          <span class="bar-label">Protótipo</span>
+          <div class="bar-track">
+            <div class="bar-fill green" data-width="20%" style="background:#22C55E; color:#fff;">~3 meses</div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Sistema Real</span>
+          <div class="bar-track">
+            <div class="bar-fill navy" data-width="82%">4 – 6 anos</div>
+          </div>
+        </div>
+
+      </div><!-- /chart-bars -->
+
+      <!-- EDITE AQUI: Nota sobre os dados -->
+      <p style="font-size:12px; color:var(--gray-dk); margin-top:24px; text-align:center;">
+        * Dados coletados entre x e x de 2026 na cidade de Sant Antônio da Patrulha.
+        Condições de irradiação: média de x h/dia de sol pleno no período.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     VIABILIDADE RESIDENCIAL
+═══════════════════════════════════════════ -->
+<section id="viabilidade">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-tag">Análise Econômica</span>
+      <h2>Viabilidade Residencial</h2>
+      <div class="divider"></div>
+      <!-- EDITE AQUI: Introdução da viabilidade -->
+      <p style="max-width:560px;">
+        Analisamos os principais fatores que determinam se a instalação solar é
+        economicamente viável para diferentes perfis de famílias brasileiras.
+      </p>
+    </div>
+
+    <div class="viab-grid">
+      <div class="viab-list fade-in">
+
+        <div class="viab-item">
+          <div class="viab-num">1</div>
+          <div>
+            <h4>Custo de Instalação</h4>
+            <!-- EDITE AQUI -->
+            <p>Um sistema de x kWp custa em média R$ x a R$ x instalado.
+            Financiamentos com taxas especiais estão disponíveis em bancos como CAIXA e BNDES.</p>
+          </div>
+        </div>
+
+        <div class="viab-item">
+          <div class="viab-num">2</div>
+          <div>
+            <h4>Economia Mensal</h4>
+            <!-- EDITE AQUI -->
+            <p>Uma família que consume x kWh/mês pode economizar entre R$ x e R$ x
+            por mês na conta de luz, dependendo da tarifa local e do porte do sistema.</p>
+          </div>
+        </div>
+
+        <div class="viab-item">
+          <div class="viab-num">3</div>
+          <div>
+            <h4>Tempo de Retorno (Payback)</h4>
+            <!-- EDITE AQUI -->
+            <p>O payback médio é de x a x anos para sistemas sem financiamento. Com
+            a inflação energética histórica de 8% ao ano, o retorno real é ainda mais rápido.</p>
+          </div>
+        </div>
+
+        <div class="viab-item">
+          <div class="viab-num">4</div>
+          <div>
+            <h4>Valorização do Imóvel</h4>
+            <!-- EDITE AQUI -->
+            <p>Imóveis com sistema solar se valorizam em média x% a x% no mercado
+            imobiliário, segundo estudos do setor de energia renovável.</p>
+          </div>
+        </div>
+
+        <div class="viab-item">
+          <div class="viab-num">5</div>
+          <div>
+            <h4>Impacto Ambiental</h4>
+            <!-- EDITE AQUI -->
+            <p>Um sistema de x kWp evita a emissão de aproximadamente 1,5 tonelada de CO₂
+            por ano, contribuindo diretamente para a redução das emissões de gases de efeito estufa.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Card de destaque -->
+      <div class="viab-highlight fade-in fade-in-delay-2">
+        <h3>Fatores de Eficiência</h3>
+        <div class="progress-list">
+
+          <div class="progress-item">
+            <label>
+              <span>Irradiação Solar</span>
+              <span style="color:var(--yellow);">92%</span>
+            </label>
+            <div class="progress-bar-bg">
+              <div class="progress-bar" data-width="92%"></div>
+            </div>
+          </div>
+
+          <div class="progress-item">
+            <label>
+              <span>Ângulo de Inclinação</span>
+              <span style="color:var(--yellow);">85%</span>
+            </label>
+            <div class="progress-bar-bg">
+              <div class="progress-bar" data-width="85%"></div>
+            </div>
+          </div>
+
+          <div class="progress-item">
+            <label>
+              <span>Temperatura dos Painéis</span>
+              <span style="color:var(--yellow);">70%</span>
+            </label>
+            <div class="progress-bar-bg">
+              <div class="progress-bar" data-width="70%"></div>
+            </div>
+          </div>
+
+          <div class="progress-item">
+            <label>
+              <span>Ausência de Sombreamento</span>
+              <span style="color:var(--yellow);">78%</span>
+            </label>
+            <div class="progress-bar-bg">
+              <div class="progress-bar" data-width="78%"></div>
+            </div>
+          </div>
+
+          <div class="progress-item">
+            <label>
+              <span>Qualidade dos Equipamentos</span>
+              <span style="color:#4ADE80;">96%</span>
+            </label>
+            <div class="progress-bar-bg">
+              <div class="progress-bar green" data-width="96%"></div>
+            </div>
+          </div>
+
+          <div class="progress-item">
+            <label>
+              <span>Manutenção e Limpeza</span>
+              <span style="color:#4ADE80;">88%</span>
+            </label>
+            <div class="progress-bar-bg">
+              <div class="progress-bar green" data-width="88%"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1);">
+          <!-- EDITE AQUI: Nota da viabilidade -->
+          <p style="font-size:0.85rem; color:rgba(255,255,255,0.5);">
+            Percentuais indicam o impacto relativo de cada fator na geração total de energia
+            do sistema. Dados baseados na instalação monitorada e literatura técnica.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CALCULADORA SOLAR
+═══════════════════════════════════════════ -->
+<section id="calculadora" class="calculator-section">
+  <div class="container">
+    <div class="section-header text-center fade-in">
+      <span class="section-tag">Ferramenta Interativa</span>
+      <h2>Calculadora de Energia Solar</h2>
+      <div class="divider center"></div>
+      <p style="max-width:500px; margin:0 auto;">
+        Descubra o potencial solar da sua casa! Insira seus dados e veja
+        a estimativa de painéis necessários e economia mensal.
+      </p>
+    </div>
+
+    <div class="calc-card fade-in">
+      <div class="calc-grid">
+
+        <div class="calc-field">
+          <label for="consumo">Consumo mensal (kWh)</label>
+          <input type="number" id="consumo" placeholder="Ex: 300" min="0" max="5000" />
+        </div>
+
+        <div class="calc-field">
+          <label for="tarifa">Tarifa de energia (R$/kWh)</label>
+          <input type="number" id="tarifa" placeholder="Ex: 0.85" step="0.01" min="0" max="5" />
+        </div>
+
+        <div class="calc-field">
+          <label for="telhado">Área do telhado disponível (m²)</label>
+          <input type="number" id="telhado" placeholder="Ex: 20 — opcional" min="0" max="500" />
+        </div>
+
+        <div class="calc-field">
+          <label for="horas">Horas de sol pleno por dia</label>
+          <select id="horas">
+            <option value="3.5">3,5 h — Sul do Brasil (inverno)</option>
+            <option value="4.5">4,5 h — Sul do Brasil (média)</option>
+            <option value="5" selected>5,0 h — Sudeste / Centro-Oeste</option>
+            <option value="5.5">5,5 h — Nordeste / Norte</option>
+            <option value="6">6,0 h — Região muito ensolarada</option>
+          </select>
+        </div>
+
+      </div>
+
+      <button class="calc-btn" id="calcBtn">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Calcular Estimativa Solar
+      </button>
+
+      <!-- Resultado -->
+      <div class="calc-result" id="calcResult">
+        <div class="result-grid">
+          <div class="result-card">
+            <div class="result-num" id="res-potencia">—</div>
+            <div class="result-label">Potência necessária</div>
+          </div>
+          <div class="result-card">
+            <div class="result-num" id="res-paineis">—</div>
+            <div class="result-label">Painéis de 400W</div>
+          </div>
+          <div class="result-card highlight">
+            <div class="result-num" id="res-economia">—</div>
+            <div class="result-label">Economia por mês</div>
+          </div>
+          <div class="result-card">
+            <div class="result-num" id="res-payback">—</div>
+            <div class="result-label">Tempo de retorno</div>
+          </div>
+          <div class="result-card">
+            <div class="result-num" id="res-custo">—</div>
+            <div class="result-label">Custo estimado</div>
+          </div>
+          <div class="result-card">
+            <div class="result-num" id="res-economia25">—</div>
+            <div class="result-label">Economia em 25 anos</div>
+          </div>
+        </div>
+        <div class="result-note">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span id="res-nota"></span>
+        </div>
+        <p style="font-size:12px; color:var(--gray-dk); margin-top:12px; text-align:center;">
+          * Estimativas simplificadas para fins educacionais. Consulte um instalador certificado para um projeto real.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     TEXTOS DO PROJETO (espaços editáveis)
+═══════════════════════════════════════════ -->
+<section id="projeto-textos" class="project-texts">
+  <div class="container">
+    <div class="section-header text-center fade-in">
+      <span class="section-tag">Detalhamento</span>
+      <h2>Aprofundamento do Projeto</h2>
+      <div class="divider center"></div>
+    </div>
+
+    <div class="texts-grid fade-in">
+
+      <div class="text-card">
+        <span class="text-card-tag">Fundamentação Teórica</span>
+        <h3>Como funciona o Efeito Fotovoltaico?</h3>
+        <!-- EDITE AQUI: Texto de fundamentação -->
+        <p>
+          O efeito fotovoltaico foi descoberto por Edmond Becquerel em 1839 e descreve a
+          geração de tensão elétrica quando a luz incide sobre determinados materiais
+          semicondutores, como o silício.
+        </p>
+        <p>
+          Os fótons da luz solar, ao atingirem a célula fotovoltaica, transferem energia
+          para os elétrons do material semicondutor, criando pares elétron-lacuna que,
+          sob a influência da junção p-n, geram uma corrente elétrica contínua (CC).
+        </p>
+        <!-- Adicione mais texto aqui -->
+      </div>
+
+      <div class="text-card">
+        <span class="text-card-tag">Materiais e Recursos</span>
+        <h3>Materiais Utilizados no Protótipo</h3>
+        <!-- EDITE AQUI: Lista de materiais -->
+        <p>
+          O protótipo foi construído com materiais acessíveis e de baixo custo, para
+          demonstrar que é possível entender os princípios da energia solar com recursos simples.
+        </p>
+        <p>
+          <strong>Materiais principais:</strong> Células fotovoltaicas de silício policristalino
+          (6V / 100mA cada), fio de cobre esmaltado, resina epóxi, madeira compensada, controlador
+          de carga PWM 12V/10A, bateria selada 12V/7Ah, multímetro digital.
+        </p>
+        <!-- Adicione mais itens/descrições aqui -->
+      </div>
+
+      <div class="text-card">
+        <span class="text-card-tag">Referências Bibliográficas</span>
+        <h3>Fontes e Referências</h3>
+        <!-- EDITE AQUI: Referências -->
+        <p>
+          ANEEL. <em>Atlas de Energia Elétrica do Brasil.</em> 4. ed. Brasília: ANEEL, 2022.
+        </p>
+        <p>
+          INPE. <em>Atlas Brasileiro de Energia Solar.</em> 3. ed. São José dos Campos: INPE, 2022.
+        </p>
+        <p>
+          VILLALVA, M. G.; GAZOLI, J. R. <em>Energia Solar Fotovoltaica.</em> São Paulo: Érica, 2020.
+        </p>
+        <p>
+          <!-- Adicione mais referências aqui -->
+          ABSOLAR. Panorama da Energia Solar no Brasil. Relatório Anual 2023.
+        </p>
+      </div>
+
+      <div class="text-card">
+        <span class="text-card-tag">Dificuldades e Aprendizados</span>
+        <h3>Desafios encontrados</h3>
+        <!-- EDITE AQUI: Dificuldades -->
+        <p>
+          Um dos maiores desafios foi garantir a estanqueidade do protótipo. Durante as primeiras
+          semanas de coleta, a umidade infiltrou-se entre as células e o substrato, causando
+          variações inesperadas na tensão de saída.
+        </p>
+        <p>
+          A solução foi relaminar as células com resina epóxi de cura lenta, garantindo melhor
+          vedação. Esse processo nos ensinou na prática sobre a importância da qualidade construtiva
+          nos painéis comerciais.
+          <!-- Adicione mais desafios e aprendizados -->
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     RESULTADOS E CONCLUSÃO
+═══════════════════════════════════════════ -->
+<section id="resultados">
+  <div class="container">
+    <div class="section-header text-center fade-in">
+      <span class="section-tag">Conclusão</span>
+      <h2>Resultados e Conclusões</h2>
+      <div class="divider center"></div>
+    </div>
+
+    <div class="cards-grid fade-in">
+
+      <div class="card yellow-accent">
+        <div class="card-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3>Hipótese Confirmada</h3>
+        <!-- EDITE AQUI -->
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero inventore esse fugit quam delectus distinctio, laboriosam eligendi incidunt natus exercitationem adipisci dolore vel aspernatur ab doloribus dicta repellat amet eveniet!</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+        </div>
+        <h3>Viabilidade Confirmada</h3>
+        <!-- EDITE AQUI -->
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum voluptatum architecto natus magni, molestiae hic tempore repellendus nobis eos? Laboriosam aperiam soluta architecto nobis voluptate odio ullam distinctio quaerat vel!</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+        </div>
+        <h3>Impacto Ambiental Positivo</h3>
+        <!-- EDITE AQUI -->
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At asperiores laboriosam, tempora cum dignissimos nisi, facere eos porro suscipit beatae consequuntur adipisci dolorum sit esse saepe blanditiis! Quos, sit laborum.</p>
+      </div>
+
+      <div class="card yellow-accent">
+        <div class="card-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        </div>
+        <h3>Aprendizados do Projeto</h3>
+        <!-- EDITE AQUI -->
+        <p>A construção do protótipo permitiu compreender na prática conceitos de física
+        e eletricidade, como circuitos em série e paralelo, curva I-V e efeito da temperatura.</p>
+      </div>
+
+    </div>
+
+    <!-- Texto de conclusão final -->
+    <div class="info-card fade-in" style="margin-top:36px; max-width:760px; margin-left:auto; margin-right:auto; background:var(--navy); border-color:rgba(245,196,0,0.25);">
+      <h3 style="color:var(--yellow); font-size:1.3rem; margin-bottom:14px;">Considerações Finais</h3>
+      <!-- EDITE AQUI: Conclusão final do projeto -->
+      <p style="color:rgba(255,255,255,0.72); font-size:0.95rem;">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate necessitatibus non, numquam nobis impedit, obcaecati velit dignissimos eaque eveniet sit voluptate sunt ipsum dolorum, eum reprehenderit deserunt architecto doloribus distinctio.
+      </p>
+      <p style="color:rgba(255,255,255,0.72); font-size:0.95rem; margin-top:10px;">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus vel perferendis velit. Molestias sint suscipit tempore beatae perspiciatis voluptatum! Voluptate officia deleniti quod velit distinctio aliquam inventore impedit maiores nobis.
+        <!-- Adicione mais texto de conclusão aqui -->
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">☀ Energia Solar</div>
+      <!-- EDITE AQUI: Dados da escola e turma -->
+      <p class="footer-desc">
+        Projeto FIC — Comparação entre Protótipos Sustentáveis
+        e Sistemas Reais e sua Viabilidade Residencial.
+      </p>
+    </div>
+    <div class="footer-info">
+      <!-- EDITE AQUI: informações do grupo -->
+      <span>📍 Colégio Adventista de Osório</span>
+      <span>👥 Gabriel Dias, Gabriel Paiva, Ramiro Vivian</span>
+      <span>📅 2026 — 3º B</span>
+      <span>🧑‍🏫 Orientador: Maria Eugênia</span>
+    </div>
+  </div>
+  <hr class="footer-divider" />
+  <div class="footer-bottom">
+    <span>FIC · Energia Solar Fotovoltaica</span>
+    <span>Feito com dedicação pela equipe ☀</span>
+  </div>
+</footer>
+
+<!-- JS -->
+<script src="js/main.js"></script>
+
+</body>
+</html>
