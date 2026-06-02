@@ -97,47 +97,142 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function calcularEnergia() {
-    const consumo = parseFloat(document.getElementById('consumo').value) || 0;
-    const tarifa  = parseFloat(document.getElementById('tarifa').value)  || 0;
-    const telhado = parseFloat(document.getElementById('telhado').value) || 0;
-    const horas   = parseFloat(document.getElementById('horas').value)   || 5;
 
-    if (consumo <= 0 || tarifa <= 0) {
-      alert('Por favor, preencha o consumo mensal e a tarifa de energia.');
-      return;
-    }
+  const consumo = parseFloat(document.getElementById('consumo').value) || 0;
+  const tarifa = parseFloat(document.getElementById('tarifa').value) || 0;
+  const telhado = parseFloat(document.getElementById('telhado').value) || 0;
+  const horas = parseFloat(document.getElementById('horas').value) || 4.4;
 
-    // Cálculos aproximados
-    const potencia_kwp   = consumo / (horas * 30);           // kWp necessário
-    const paineis        = Math.ceil(potencia_kwp / 0.4);    // ~400W por painel
-    const area_necessaria = paineis * 1.8;                    // ~1,8 m² por painel
-    const economia_mes   = consumo * tarifa * 0.9;           // ~90% de economia
-    const custo_sistema  = potencia_kwp * 5000;              // ~R$5000/kWp
-    const payback_anos   = custo_sistema / (economia_mes * 12);
-    const economia_25    = economia_mes * 12 * 25;           // vida útil 25 anos
-
-    // Exibe resultados
-    document.getElementById('res-potencia').textContent   = potencia_kwp.toFixed(2) + ' kWp';
-    document.getElementById('res-paineis').textContent    = paineis;
-    document.getElementById('res-economia').textContent   = 'R$ ' + economia_mes.toFixed(2).replace('.', ',');
-    document.getElementById('res-payback').textContent    = payback_anos.toFixed(1) + ' anos';
-    document.getElementById('res-custo').textContent      = 'R$ ' + custo_sistema.toLocaleString('pt-BR');
-    document.getElementById('res-economia25').textContent = 'R$ ' + economia_25.toLocaleString('pt-BR');
-
-    const area_ok = area_necessaria <= telhado || telhado === 0;
-    const nota = document.getElementById('res-nota');
-    if (telhado > 0) {
-      nota.textContent = area_ok
-        ? `Ótimo! Seu telhado de ${telhado} m² comporta os ${paineis} painéis necessários (${area_necessaria.toFixed(1)} m²). O sistema é viável!`
-        : `Atenção: você precisa de ${area_necessaria.toFixed(1)} m² mas seu telhado tem apenas ${telhado} m². Considere uma instalação parcial.`;
-    } else {
-      nota.textContent = `Você precisará de aproximadamente ${area_necessaria.toFixed(1)} m² de telhado para instalar os ${paineis} painéis solares.`;
-    }
-
-    const resultDiv = document.getElementById('calcResult');
-    resultDiv.classList.add('show');
-    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  if (consumo <= 0 || tarifa <= 0) {
+    alert('Por favor, preencha o consumo mensal e a tarifa de energia.');
+    return;
   }
+
+  // ====================================
+  // DADOS DA PLACA SOLAR
+  // ====================================
+
+  const POTENCIA_PLACA = 585; // W
+  const ALTURA_PLACA = 2.278; // m
+  const LARGURA_PLACA = 1.135; // m
+  const EFICIENCIA = 0.226; // 22,6%
+
+  const AREA_PLACA = ALTURA_PLACA * LARGURA_PLACA;
+
+  // ====================================
+  // PARÂMETROS DO SISTEMA
+  // ====================================
+
+  // Perdas do sistema (cabos, inversor, temperatura etc.)
+  const PERFORMANCE_RATIO = 0.80;
+
+  // 40% consumido instantaneamente
+  const USO_SIMULTANEO = 0.40;
+
+  // 60% vira crédito de energia
+  const APROVEITAMENTO_CREDITOS = 1.00;
+
+  // ====================================
+  // GERAÇÃO DE ENERGIA
+  // ====================================
+
+  const geracaoPlacaMes =
+    (POTENCIA_PLACA / 1000) *
+    horas *
+    30 *
+    PERFORMANCE_RATIO;
+
+  const paineis =
+    Math.ceil(consumo / geracaoPlacaMes);
+
+  const potencia_kwp =
+    (paineis * POTENCIA_PLACA) / 1000;
+
+  const area_necessaria =
+    paineis * AREA_PLACA * 1.10;
+
+  // ====================================
+  // ECONOMIA MENSAL
+  // ====================================
+
+  const economia_mes =
+    (consumo * tarifa * USO_SIMULTANEO) +
+    (consumo * tarifa * (1 - USO_SIMULTANEO) * APROVEITAMENTO_CREDITOS);
+
+  // ====================================
+  // INVESTIMENTO
+  // ====================================
+
+  const custo_sistema =
+    potencia_kwp * 4000;
+
+  const payback_anos =
+    custo_sistema / (economia_mes * 12);
+
+  const economia_25 =
+    economia_mes * 12 * 25;
+
+  // ====================================
+  // RESULTADOS
+  // ====================================
+
+  document.getElementById('res-potencia').textContent =
+    potencia_kwp.toFixed(2) + ' kWp';
+
+  document.getElementById('res-paineis').textContent =
+    paineis;
+
+  document.getElementById('res-economia').textContent =
+    'R$ ' + economia_mes.toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+
+  document.getElementById('res-payback').textContent =
+    payback_anos.toFixed(1) + ' anos';
+
+  document.getElementById('res-custo').textContent =
+    'R$ ' + custo_sistema.toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+
+  document.getElementById('res-economia25').textContent =
+    'R$ ' + economia_25.toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+
+  const area_ok =
+    area_necessaria <= telhado || telhado === 0;
+
+  const nota =
+    document.getElementById('res-nota');
+
+  if (telhado > 0) {
+
+    nota.textContent = area_ok
+      ? `Ótimo! Seu telhado de ${telhado} m² comporta os ${paineis} painéis necessários (${area_necessaria.toFixed(1)} m²). O sistema é viável!`
+      : `Atenção: você precisa de ${area_necessaria.toFixed(1)} m² para instalar os ${paineis} painéis, mas seu telhado possui apenas ${telhado} m².`;
+
+  } else {
+
+    nota.textContent =
+      `Você precisará de aproximadamente ${area_necessaria.toFixed(1)} m² de telhado para instalar os ${paineis} painéis solares.`;
+
+  }
+
+  const resultDiv =
+    document.getElementById('calcResult');
+
+  resultDiv.classList.add('show');
+
+  resultDiv.scrollIntoView({
+    behavior: 'smooth',
+    block: 'nearest'
+  });
+
+}
 
   /* ── CONTAGEM ANIMADA (hero stats) ── */
   const heroSection = document.querySelector('.hero');
