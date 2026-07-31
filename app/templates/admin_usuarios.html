@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="topo-pagina">
+  <div>
+    <h1>Usuários e Cargos</h1>
+    <div class="legenda">Crie cargos personalizados e escolha exatamente quais permissões cada um tem</div>
+  </div>
+</div>
+
+<div class="painel-secao">
+  <h2 class="titulo-secao" style="font-size:14px;">Novo Usuário</h2>
+  <form class="form-inline" method="post" action="/admin/usuarios/novo">
+    <div class="campo"><label>Usuário (login)</label><input type="text" name="username" required></div>
+    <div class="campo"><label>Nome de Exibição</label><input type="text" name="nome_exibicao" required></div>
+    <div class="campo"><label>Senha</label><input type="password" name="senha" required></div>
+    <div class="campo">
+      <label>Cargo</label>
+      <select name="role_id" required>
+        {% for cargo in cargos %}<option value="{{ cargo.id }}">{{ cargo.nome }}</option>{% endfor %}
+      </select>
+    </div>
+    <button class="botao" type="submit">Criar</button>
+  </form>
+</div>
+
+<div class="painel-secao">
+  <h2 class="titulo-secao" style="font-size:14px;">Usuários</h2>
+  <table>
+    <thead><tr><th>Usuário</th><th>Nome</th><th>Cargo</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      {% for u in usuarios %}
+      <tr>
+        <td class="mono">{{ u.username }}</td>
+        <td>{{ u.nome_exibicao }}</td>
+        <td>
+          <form method="post" action="/admin/usuarios/{{ u.id }}/cargo" style="display:inline;">
+            <select name="role_id" onchange="this.form.submit()" {{ 'disabled' if u.role.protegido and u.id == usuario.id else '' }}>
+              {% for cargo in cargos %}
+              <option value="{{ cargo.id }}" {{ 'selected' if cargo.id == u.role_id else '' }}>{{ cargo.nome }}</option>
+              {% endfor %}
+            </select>
+          </form>
+        </td>
+        <td>{{ 'Ativo' if u.ativo else 'Desativado' }}</td>
+        <td>
+          <form method="post" action="/admin/usuarios/{{ u.id }}/alternar-ativo" style="display:inline;">
+            <button class="botao secundario pequeno" type="submit" {{ 'disabled' if u.id == usuario.id else '' }}>
+              {{ 'Desativar' if u.ativo else 'Ativar' }}
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="painel-secao">
+  <h2 class="titulo-secao" style="font-size:14px;">Novo Cargo</h2>
+  <form method="post" action="/admin/cargos/novo">
+    <div class="form-inline" style="margin-bottom:12px;">
+      <div class="campo"><label>Nome do Cargo</label><input type="text" name="nome" required></div>
+      <div class="campo"><label>Cor</label><input type="color" name="cor" value="#7fa3bd" style="height:40px; padding:2px;"></div>
+    </div>
+    <label style="font-size:12px; color:var(--texto-fraco); text-transform:uppercase; letter-spacing:0.05em;">Permissões</label>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:6px; margin:8px 0 14px;">
+      {% for chave, rotulo in catalogo_permissoes.items() %}
+      <label style="font-size:12.5px; display:flex; gap:6px; align-items:center;">
+        <input type="checkbox" name="permissoes" value="{{ chave }}" style="width:auto;"> {{ rotulo }}
+      </label>
+      {% endfor %}
+    </div>
+    <button class="botao" type="submit">Criar Cargo</button>
+  </form>
+</div>
+
+<div class="painel-secao">
+  <h2 class="titulo-secao" style="font-size:14px;">Cargos Existentes</h2>
+  {% for cargo in cargos %}
+  <div style="border-top:1px solid var(--borda); padding:14px 0;">
+    <strong style="color:{{ cargo.cor }};">{{ cargo.nome }}</strong>
+    {% if cargo.is_admin %}<span class="selo resolvido" style="margin-left:8px;">Acesso Total</span>{% endif %}
+    {% if not cargo.is_admin %}
+    <form method="post" action="/admin/cargos/{{ cargo.id }}/permissoes" style="margin-top:8px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:6px; margin-bottom:10px;">
+        {% set permissoes_do_cargo = cargo.permissoes | map(attribute='permission_key') | list %}
+        {% for chave, rotulo in catalogo_permissoes.items() %}
+        <label style="font-size:12.5px; display:flex; gap:6px; align-items:center;">
+          <input type="checkbox" name="permissoes" value="{{ chave }}" style="width:auto;" {{ 'checked' if chave in permissoes_do_cargo else '' }}> {{ rotulo }}
+        </label>
+        {% endfor %}
+      </div>
+      <button class="botao secundario pequeno" type="submit">Salvar Permissões</button>
+    </form>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

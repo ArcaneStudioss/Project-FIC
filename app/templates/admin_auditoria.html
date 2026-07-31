@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="topo-pagina">
+  <div>
+    <h1>Auditoria e Backups</h1>
+    <div class="legenda">Nada é apagado de verdade no sistema — toda ação fica registrada aqui</div>
+  </div>
+  <form method="post" action="/admin/auditoria/backup-agora">
+    <button class="botao" type="submit">Fazer Backup Agora</button>
+  </form>
+</div>
+
+<div class="painel-secao">
+  <h2 class="titulo-secao" style="font-size:14px;">Backups do Banco de Dados ({{ backups | length }})</h2>
+  <table>
+    <thead><tr><th>Arquivo</th></tr></thead>
+    <tbody>
+      {% for b in backups[:15] %}
+      <tr><td class="mono">{{ b.name }}</td></tr>
+      {% else %}
+      <tr><td style="color:var(--texto-fraco);">Nenhum backup ainda — clique em "Fazer Backup Agora".</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="painel-secao">
+  <h2 class="titulo-secao" style="font-size:14px;">Log de Auditoria (últimas 300 ações)</h2>
+  <table>
+    <thead><tr><th>Quando</th><th>Ação</th><th>Entidade</th><th>Detalhes</th></tr></thead>
+    <tbody>
+      {% for log in logs %}
+      <tr>
+        <td class="mono">{{ log.criado_em.strftime('%d/%m/%Y %H:%M:%S') }}</td>
+        <td>{{ log.acao }}</td>
+        <td>{{ log.entidade }}{% if log.entidade_id %} #{{ log.entidade_id }}{% endif %}</td>
+        <td>{{ log.detalhes }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4" style="color:var(--texto-fraco);">Nenhuma ação registrada ainda.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

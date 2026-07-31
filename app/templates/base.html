@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ cfg.get('sigla', 'Sistema') }} — {{ cfg.get('nome_cidade', '') }}</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    :root {
+      --bg: {{ cfg.get('cor_fundo', '#0b0c0e') }};
+      --painel: {{ cfg.get('cor_painel', '#16181c') }};
+      --borda: {{ cfg.get('cor_borda', '#2a2d33') }};
+      --texto: {{ cfg.get('cor_texto', '#e9eaec') }};
+      --texto-fraco: {{ cfg.get('cor_texto_fraco', '#9aa0a8') }};
+      --destaque: {{ cfg.get('cor_destaque', '#7fa3bd') }};
+      --sucesso: {{ cfg.get('cor_sucesso', '#5fa87a') }};
+      --alerta: {{ cfg.get('cor_alerta', '#c9a227') }};
+      --perigo: {{ cfg.get('cor_perigo', '#c1584f') }};
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="barra-lateral">
+      <div class="marca">
+        <img src="/static/img/logo.png" alt="Logo">
+        <div>
+          <div class="nome-orgao">{{ cfg.get('sigla', 'DIP') }}</div>
+          <div class="nome-cidade">{{ cfg.get('nome_cidade', 'Cidade do Hype') }}</div>
+        </div>
+      </div>
+      <nav class="nav">
+        {% for aba in abas %}
+        {% set url = url_abas.get(aba.chave, '/dashboard') %}
+        <a href="{{ url }}" class="{{ 'ativo' if request.url.path == url else '' }}">
+          <span>{{ aba.icone }}</span> {{ aba.rotulo }}
+        </a>
+        {% endfor %}
+      </nav>
+      {% if usuario %}
+      <div class="rodape-lateral">
+        <div class="usuario-nome">{{ usuario.nome_exibicao }}</div>
+        <div>{{ usuario.role.nome }}</div>
+        <form method="post" action="/logout" style="margin-top:8px;">
+          <button class="botao secundario pequeno" type="submit">Sair</button>
+        </form>
+      </div>
+      {% endif %}
+    </aside>
+    <main class="conteudo">
+      {% block conteudo %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>

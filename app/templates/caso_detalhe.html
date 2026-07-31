@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="topo-pagina">
+  <div>
+    <h1>{{ caso.titulo }}</h1>
+    <div class="legenda">{{ caso.descricao or 'Sem descrição.' }}</div>
+  </div>
+  <div style="text-align:right;">
+    <span class="selo {{ caso.status }}">{{ status_label[caso.status] }}</span>
+    {% if 'casos.gerenciar' in permissoes %}
+    <form method="post" action="/casos/{{ caso.id }}/status" style="margin-top:8px;">
+      <select name="novo_status" onchange="this.form.submit()">
+        {% for chave, rotulo in status_label.items() %}
+        <option value="{{ chave }}" {{ 'selected' if caso.status == chave else '' }}>{{ rotulo }}</option>
+        {% endfor %}
+      </select>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+{% if 'evidencias.anexar' in permissoes %}
+<div class="painel-secao">
+  <h2 class="titulo-secao" style="font-size:14px;">Anexar Evidência</h2>
+  <form class="form-inline" method="post" action="/casos/{{ caso.id }}/evidencia" enctype="multipart/form-data">
+    <div class="campo">
+      <label>Tipo</label>
+      <select name="tipo" required>
+        {% for chave, rotulo in tipos.items() %}
+        <option value="{{ chave }}">{{ rotulo }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="campo">
+      <label>Título</label>
+      <input type="text" name="titulo" required>
+    </div>
+    <div class="campo" style="flex:2;">
+      <label>Descrição</label>
+      <input type="text" name="descricao">
+    </div>
+    <div class="campo">
+      <label>Arquivo (opcional)</label>
+      <input type="file" name="arquivo">
+    </div>
+    <button class="botao" type="submit">Anexar</button>
+  </form>
+</div>
+{% endif %}
+
+<div class="painel-secao">
+  <h2 class="titulo-secao" style="font-size:14px;">Evidências — organizadas por categoria</h2>
+  {% if not agrupadas %}
+  <p style="color:var(--texto-fraco);">Nenhuma evidência anexada ainda.</p>
+  {% endif %}
+  {% for chave, lista in agrupadas.items() %}
+  <div class="grupo-tipo">
+    <h3>{{ tipos.get(chave, chave) }} ({{ lista | length }})</h3>
+    <div class="grade-evidencias">
+      {% for ev in lista %}
+      <div class="cartao-evidencia">
+        {% if ev.caminho_arquivo %}
+        <img src="/uploads/{{ ev.caminho_arquivo }}" alt="{{ ev.titulo }}">
+        {% endif %}
+        <div class="corpo">
+          <div class="titulo-ev">{{ ev.titulo }}</div>
+          <div class="desc-ev">{{ ev.descricao or '—' }}</div>
+        </div>
+        <div class="rodape-ev">
+          <span>{{ ev.dono.nome_exibicao }} · {{ ev.criado_em.strftime('%d/%m %H:%M') }}</span>
+          {% if 'evidencias.arquivar' in permissoes %}
+          <form method="post" action="/evidencias/{{ ev.id }}/arquivar" onsubmit="return confirm('Arquivar esta evidência? Ela some da lista mas continua guardada no sistema.');">
+            <button class="botao secundario pequeno" type="submit">Arquivar</button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+<div class="documento-oficial">
+  <div class="doc-cabecalho">
+    <img src="/static/img/logo.png" alt="Logo">
+    <div class="linha-orgao">GOVERNO DA {{ cfg.get('nome_cidade', 'CIDADE DO HYPE') | upper }}</div>
+    <div class="linha-orgao">{{ cfg.get('nome_orgao', 'Departamento de Inteligência Policial') | upper }}</div>
+  </div>
+
+  <div class="doc-titulo">
+    <h1>INQUÉRITO POLICIAL</h1>
+    <div class="subtitulo-doc">CASO: {{ caso.titulo | upper }}</div>
+  </div>
+  <hr class="doc-divisor">
+
+  <table class="doc-tabela">
+    <tr><td><strong>Instaurado em</strong></td><td>{{ data_instaurado }}</td></tr>
+    <tr><td><strong>Gerado em</strong></td><td>{{ data_hoje }}</td></tr>
+    <tr><td><strong>Gerado por</strong></td><td>{{ gerado_por.nome_exibicao }} ({{ gerado_por.role.nome }})</td></tr>
+  </table>
+
+  <div class="doc-secao-titulo">I. DO OBJETO</div>
+  <p>{{ caso.descricao or 'Sem descrição registrada para este caso.' }}</p>
+
+  <div class="doc-secao-titulo">II. DAS EVIDÊNCIAS REUNIDAS</div>
+  {% if not evidencias %}
+  <p>Nenhuma evidência registrada para este caso.</p>
+  {% endif %}
+  {% for chave, lista in evidencias_por_tipo.items() %}
+  <p><strong>{{ tipos.get(chave, chave) }}</strong></p>
+  {% for ev in lista %}
+  <div class="doc-prova-item">
+    <div><strong>{{ ev.titulo }}</strong> — {{ ev.dono.nome_exibicao }}, {{ ev.criado_em.strftime('%d/%m/%Y') }}</div>
+    <div>{{ ev.descricao or '' }}</div>
+    {% if ev.caminho_arquivo %}<img src="/uploads/{{ ev.caminho_arquivo }}" alt="{{ ev.titulo }}">{% endif %}
+  </div>
+  {% endfor %}
+  {% endfor %}
+
+  <div class="doc-secao-titulo">III. DA CONCLUSÃO</div>
+  <p>O presente inquérito reúne o conjunto probatório disponível até a presente data, servindo de base para as
+    providências cabíveis por parte da autoridade competente.</p>
+
+  <div class="doc-rodape">
+    Documento gerado eletronicamente pelo Sistema {{ cfg.get('sigla', 'DIP') }} — {{ cfg.get('nome_cidade', '') }}.
+    Válido apenas nos limites do ambiente de RP.
+  </div>
+</div>
